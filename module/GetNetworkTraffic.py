@@ -17,11 +17,9 @@ class GetNetworkTraffic:
         after_rx = get(self.RX_PATH)
         after_tx = get(self.TX_PATH)
 
-        print(self.interface_name)
-        print(after_rx - before_rx)
-        print(after_tx - before_tx)
+        return {self.interface_name : {'rx' : after_rx - before_rx, 'tx' : after_tx - before_tx}}
 
 
 if __name__ == "__main__":
     t = GetNetworkTraffic('wlp0s20f3')
-    t.Get()
+    print(t.Get())
