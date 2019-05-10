@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from time import sleep
 from subprocess import Popen, PIPE
 from select import poll

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from subprocess import Popen, PIPE
 from time import sleep
 import re
