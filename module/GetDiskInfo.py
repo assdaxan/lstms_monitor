@@ -10,7 +10,7 @@ class GetDiskInfo:
     def Get(self):
         self.disk_info_dict.clear()
 
-        p = Popen('df', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
+        p = Popen('df -lk', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
         t = p.stdout.read().decode('utf8')
 
         datas = self.re_info.finditer(t)
