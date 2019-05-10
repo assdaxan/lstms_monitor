@@ -4,14 +4,15 @@ import re
 
 class GetCpuInfo:
     def __init__(self):
-        self.re_info = re.compile(r'(?P<cpu_id>cpu\d*)(?: *)(?P<user>\d+)(?: *)(?P<nice>\d+)(?: *)(?P<system>\d+)(?: *)(?P<idle>\d+)(?: *)(?P<iowait>\d+)(?: *)(?P<irq>\d+)(?: *)(?P<softirq>\d+)(?: *)(?P<steal>\d+)(?: *)(?P<guest>\d+)(?: *)(?P<guest_nice>\d+)(?: *)')
+        self.re_stat = re.compile(r'(?P<cpu_id>cpu\d*)(?: *)(?P<user>\d+)(?: *)(?P<nice>\d+)(?: *)(?P<system>\d+)(?: *)(?P<idle>\d+)(?: *)(?P<iowait>\d+)(?: *)(?P<irq>\d+)(?: *)(?P<softirq>\d+)(?: *)(?P<steal>\d+)(?: *)(?P<guest>\d+)(?: *)(?P<guest_nice>\d+)(?: *)')
+        self.re_cpuinfo_model_name = re.compile(r'(?<=model name\t\: )([^\n]+)')
 
     def __get(self):
         cpu_info_dict = {}
         p = Popen('cat /proc/stat', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
         t = p.stdout.read().decode('utf8')
 
-        datas = self.re_info.finditer(t)
+        datas = self.re_stat.finditer(t)
 
         for data in datas:
             cpu_id = data.group('cpu_id')
@@ -47,10 +48,16 @@ class GetCpuInfo:
 
         return usage_dict
         
+    def GetCpuModelName(self):
+        p = Popen('cat /proc/cpuinfo | grep "model name"', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
+        t = p.stdout.read().decode('utf8')
+
+        return self.re_cpuinfo_model_name.findall(t)
 
 if __name__ == "__main__":
     cpu = GetCpuInfo()
 
+    print(cpu.GetCpuModelName())
     while(True):
         print(cpu.GetUsage())
         sleep(1)
