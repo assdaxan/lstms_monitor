@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from subprocess import Popen, PIPE
+from Shell import Shell
 import re
 
-class GetMemoryInfo:
+class GetMemoryInfo(Shell):
     def __init__(self):
         self.re_info = re.compile(r'([\w\(\)_]+)(?:\:)(?: *)(\d+)(?: *)(?:kB)?')
         self.memory_info_dict = {}
@@ -10,9 +10,7 @@ class GetMemoryInfo:
     def Get(self):
         self.memory_info_dict.clear()
 
-        p = Popen('cat /proc/meminfo', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
-        t = p.stdout.read().decode('utf8')
-
+        t = self.Command('cat /proc/meminfo')
         datas = self.re_info.findall(t)
 
         for data in datas:

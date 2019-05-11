@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-from subprocess import Popen, PIPE
+from Shell import Shell
 import re
 
-class GetDiskInfo:
+class GetDiskInfo(Shell):
     def __init__(self):
         self.re_info = re.compile(r'(?P<Filesystem>[^ \n]+)(?: *)(?P<Size>\d+)(?: *)(?P<Used>\d+)(?: *)(?P<Available>\d+)(?: *)(?P<Percent>\d+)(?:%)(?: *)(?P<Mounted>[^\n]+)')
         self.disk_info_dict = {}
@@ -10,8 +10,7 @@ class GetDiskInfo:
     def Get(self):
         self.disk_info_dict.clear()
 
-        p = Popen('df -lk', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
-        t = p.stdout.read().decode('utf8')
+        t = self.Command('df -lk')
 
         datas = self.re_info.finditer(t)
 

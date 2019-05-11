@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
-from subprocess import Popen, PIPE
+from Shell import Shell
 from time import sleep
 import re
 
-class GetCpuInfo:
+class GetCpuInfo(Shell):
     def __init__(self):
         self.re_stat = re.compile(r'(?P<cpu_id>cpu\d*)(?: *)(?P<user>\d+)(?: *)(?P<nice>\d+)(?: *)(?P<system>\d+)(?: *)(?P<idle>\d+)(?: *)(?P<iowait>\d+)(?: *)(?P<irq>\d+)(?: *)(?P<softirq>\d+)(?: *)(?P<steal>\d+)(?: *)(?P<guest>\d+)(?: *)(?P<guest_nice>\d+)(?: *)')
         self.re_cpuinfo_model_name = re.compile(r'(?<=model name\t\: )([^\n]+)')
 
     def __get(self):
         cpu_info_dict = {}
-        p = Popen('cat /proc/stat', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
-        t = p.stdout.read().decode('utf8')
+        t = self.Command('cat /proc/stat')
 
         datas = self.re_stat.finditer(t)
 
@@ -50,9 +49,7 @@ class GetCpuInfo:
         return usage_dict
         
     def GetCpuModelName(self):
-        p = Popen('cat /proc/cpuinfo | grep "model name"', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
-        t = p.stdout.read().decode('utf8')
-
+        t = self.Command('cat /proc/cpuinfo | grep "model name"')
         return self.re_cpuinfo_model_name.findall(t)
 
 if __name__ == "__main__":

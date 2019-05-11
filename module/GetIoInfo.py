@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
+from Shell import Shell
 from time import sleep
-from subprocess import Popen, PIPE
 import re
 
-class GetIoInfo:
+class GetIoInfo(Shell):
     def __init__(self):
         self.re_stat = re.compile(r'(?: *)(?:\d+)(?: *)(?:\d+)(?: *)(?P<dev>[\w\d]+)(?: *)(?P<reads>\d+)(?: *)(?P<rd_mrg>\d+)(?: *)(?P<rd_sectors>\d+)(?: *)(?P<ms_reading>\d+)(?: *)(?P<writes>\d+)(?: *)(?P<wr_mrg>\d+)(?: *)(?P<wr_sectors>\d+)(?: *)(?P<ms_writing>\d+)(?: *)(?P<cur_ios>\d+)(?: *)(?P<ms_doing_io>\d+)(?: *)(?P<ms_weighted>\d+)')
         self.io_info_dict = {}
@@ -11,8 +11,7 @@ class GetIoInfo:
     def Get(self):
         self.io_info_dict.clear()
 
-        p = Popen('cat /proc/diskstats', stdin=PIPE, stdout=PIPE, stderr=PIPE, shell=True)
-        t = p.stdout.read().decode('utf8')
+        t = self.Command('cat /proc/diskstats')
         
         datas = self.re_stat.finditer(t)
         
