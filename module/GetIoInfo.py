@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from Shell import Shell
-from time import sleep
 import re
 
 class GetIoInfo(Shell):
