@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from Shell import Shell
+from module.Shell import Shell
 import re
 
 class GetMemoryInfo(Shell):
