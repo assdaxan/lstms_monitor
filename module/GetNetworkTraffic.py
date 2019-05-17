@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from time import sleep
+from time import sleep, strftime
 
 class GetNetworkTraffic:
     def __init__(self, interface_name):
@@ -18,7 +18,9 @@ class GetNetworkTraffic:
         after_rx = get(self.RX_PATH)
         after_tx = get(self.TX_PATH)
 
-        return {self.interface_name : {'rx' : after_rx - before_rx, 'tx' : after_tx - before_tx}}
+        datetime_ = strftime("%Y-%m-%d %H:%M:%S")
+
+        return {self.interface_name : {'datetime_':datetime_ ,'rx' : after_rx - before_rx, 'tx' : after_tx - before_tx}}
 
 
 if __name__ == "__main__":
