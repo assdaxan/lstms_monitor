@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from module.Shell import Shell
+from time import strftime
 import re
 
 class GetDiskInfo(Shell):
@@ -10,6 +11,7 @@ class GetDiskInfo(Shell):
     def Get(self):
         self.disk_info_dict.clear()
 
+        datetime_ = strftime("%Y-%m-%d %H:%M:%S")
         t = self.Command('df -lk')
 
         datas = self.re_info.finditer(t)
@@ -22,7 +24,7 @@ class GetDiskInfo(Shell):
                 Available = data.group('Available')
                 Percent = data.group('Percent')
                 Mounted = data.group('Mounted')
-                self.disk_info_dict.update({Mounted:{'Size':Size, 'Used':Used, 'Available':Available, 'Percent':Percent, 'Filesystem':Filesystem}})
+                self.disk_info_dict.update({Mounted:{'Size':Size, 'Used':Used, 'Available':Available, 'Percent':Percent, 'Filesystem':Filesystem, 'datetime_':datetime_}})
 
         return self.disk_info_dict
         

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from module.Shell import Shell
+from time import strftime
 import re
 
 class GetMemoryInfo(Shell):
@@ -22,10 +23,14 @@ class GetMemoryInfo(Shell):
         MemFree  = self.memory_info_dict['MemFree']
         Inactive = self.memory_info_dict['Inactive']
 
+        datetime_ = strftime("%Y-%m-%d %H:%M:%S")
+
         return {'MemTotal':MemTotal,
                 'MemFree':MemFree,
                 'Inactive':Inactive,
-                'MemUsage':(MemTotal - (MemFree + Inactive)) / MemTotal * 100}
+                'MemUsage':(MemTotal - (MemFree + Inactive)) / MemTotal * 100,
+                'datetime_':datetime_
+                }
         
 
 if __name__ == "__main__":
