@@ -22,7 +22,7 @@ class GetDiskInfo(Shell):
                 Available = data.group('Available')
                 Percent = data.group('Percent')
                 Mounted = data.group('Mounted')
-                self.disk_info_dict.update({Filesystem:{'Size':Size, 'Used':Used, 'Available':Available, 'Percent':Percent, 'Mounted':Mounted}})
+                self.disk_info_dict.update({Mounted:{'Size':Size, 'Used':Used, 'Available':Available, 'Percent':Percent, 'Filesystem':Filesystem}})
 
         return self.disk_info_dict
         

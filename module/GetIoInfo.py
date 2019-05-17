@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from module.Shell import Shell
+from time import strftime
 import re
 
 class GetIoInfo(Shell):
@@ -10,6 +11,7 @@ class GetIoInfo(Shell):
     def Get(self):
         self.io_info_dict.clear()
 
+        datetime_ = strftime("%Y-%m-%d %H:%M:%S")
         t = self.Command('cat /proc/diskstats')
         
         datas = self.re_stat.finditer(t)
@@ -20,7 +22,7 @@ class GetIoInfo(Shell):
                 ms_reading = data.group('ms_reading')
                 ms_writing = data.group('ms_writing')
 
-                self.io_info_dict.update({dev:{'ms_reading':ms_reading, 'ms_writing':ms_writing}})
+                self.io_info_dict.update({dev:{'ms_reading':ms_reading, 'ms_writing':ms_writing, 'datetime_':datetime_}})
 
         return self.io_info_dict
 

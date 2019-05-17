@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from module.Shell import Shell
-from time import sleep
+from time import sleep, strftime
 import re
 
 class GetCpuInfo(Shell):
@@ -35,16 +35,19 @@ class GetCpuInfo(Shell):
     def GetUsage(self):
         usage_dict = {}
 
-        PrevTotal = self.__get()
-        sleep(1)
+        datetime_ = strftime("%Y-%m-%d %H:%M:%S")
+        # PrevTotal = self.__get()
+        # sleep(10)
         Total = self.__get()
 
         for cpu_id in Total.keys():
-            diff_total = (Total[cpu_id]['Total_CPU_time'] - PrevTotal[cpu_id]['Total_CPU_time'])
-            diff_idle = (Total[cpu_id]['Total_CPU_Idle_time']-PrevTotal[cpu_id]['Total_CPU_Idle_time'])
-            cpu_usage = (diff_total - diff_idle) / diff_total * 100
+            # diff_total = (Total[cpu_id]['Total_CPU_time'] - PrevTotal[cpu_id]['Total_CPU_time'])
+            # diff_idle = (Total[cpu_id]['Total_CPU_Idle_time'] - PrevTotal[cpu_id]['Total_CPU_Idle_time'])
+            diff_total = (Total[cpu_id]['Total_CPU_time'])
+            diff_idle = (Total[cpu_id]['Total_CPU_Idle_time'])
+            CPUUsage = (diff_total - diff_idle) / diff_total * 100
 
-            usage_dict.update({cpu_id:cpu_usage})
+            usage_dict.update({cpu_id:{"CPUUsage":CPUUsage, "datetime_":datetime_}})
 
         return usage_dict
         
