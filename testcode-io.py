@@ -2,6 +2,9 @@ import json
 import urllib3
 from module.GetIoInfo import GetIoInfo
 
+with open('Token.conf', 'r') as f:
+        token = f.read()
+
 http = urllib3.PoolManager()
 
 io = GetIoInfo()
@@ -14,6 +17,6 @@ r = http.request(
         'https://lstms.ubun.net/monitor/IO.php',
         body=encoded_data,
         headers={'Content-Type': 'application/json',
-                "token":"asdfqwer1234asdfqwer1234asdfqwer1234asdfqwer1234asdfqwer1234asdf"}
+                "token":token}
     )
 print(r.data.decode('utf-8'))

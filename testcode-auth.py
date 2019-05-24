@@ -26,6 +26,8 @@ class GetAuthLog:
             self.Post(data)
 
     def Post(self, data):
+        with open('Token.conf', 'r') as f:
+            token = f.read()
         data_dict = {"datetime_":f"{strftime('%Y')}-{self.MON[data.group('mon')]}-{data.group('day')} {data.group('time')}",
                         "user":data.group('user'),
                         "command":data.group('command'),
@@ -38,7 +40,7 @@ class GetAuthLog:
                 'https://lstms.ubun.net/monitor/auth.php',
                 body=encoded_data,
                 headers={'Content-Type': 'application/json',
-                        "token":"asdfqwer1234asdfqwer1234asdfqwer1234asdfqwer1234asdfqwer1234asdf"}
+                        "token":token}
             )
         print(r.data.decode('utf-8'))
 

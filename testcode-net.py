@@ -3,6 +3,9 @@ import urllib3
 from module.GetNetInterface import GetNetInterface 
 from module.GetNetworkTraffic import GetNetworkTraffic
 
+with open('Token.conf', 'r') as f:
+        token = f.read()
+
 http = urllib3.PoolManager()
 
 data = {}
@@ -20,6 +23,6 @@ r = http.request(
         'https://lstms.ubun.net/monitor/traffic.php',
         body=encoded_data,
         headers={'Content-Type': 'application/json',
-                "token":"asdfqwer1234asdfqwer1234asdfqwer1234asdfqwer1234asdfqwer1234asdf"}
+                "token":token}
     )
 print(r.data.decode('utf-8'))
