@@ -3,7 +3,7 @@ import urllib3
 from module.GetNetInterface import GetNetInterface 
 from module.GetNetworkTraffic import GetNetworkTraffic
 
-with open('Token.conf', 'r') as f:
+with open('/etc/lstms_m/Token.conf', 'r') as f:
         token = f.read()
 
 http = urllib3.PoolManager()

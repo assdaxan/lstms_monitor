@@ -13,7 +13,7 @@ def login():
 
     return {'ID':ID, 'PW':PW}
 
-CONF_FILE = 'Token.conf'
+CONF_FILE = '/etc/lstms_m/Token.conf'
 
 if(check(CONF_FILE) == True):
     print('Exists Token')

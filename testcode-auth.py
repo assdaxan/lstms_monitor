@@ -26,7 +26,7 @@ class GetAuthLog:
             self.Post(data)
 
     def Post(self, data):
-        with open('Token.conf', 'r') as f:
+        with open('/etc/lstms_m/Token.conf', 'r') as f:
             token = f.read()
         data_dict = {"datetime_":f"{strftime('%Y')}-{self.MON[data.group('mon')]}-{data.group('day')} {data.group('time')}",
                         "user":data.group('user'),

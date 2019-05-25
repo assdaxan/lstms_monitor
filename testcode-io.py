@@ -2,7 +2,7 @@ import json
 import urllib3
 from module.GetIoInfo import GetIoInfo
 
-with open('Token.conf', 'r') as f:
+with open('/etc/lstms_m/Token.conf', 'r') as f:
         token = f.read()
 
 http = urllib3.PoolManager()
