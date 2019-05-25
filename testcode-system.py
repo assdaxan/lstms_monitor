@@ -34,7 +34,10 @@ else:
         )
 
     res = r.data.decode('utf-8')
-    data = res.split(":")
+    if res == 'ID or password is incorrect':
+        print("ID or password is incorrect")
+    else:
+        data = res.split(":")
 
-    with open(CONF_FILE, 'w') as f:
-        f.write(data[1].strip())
+        with open(CONF_FILE, 'w') as f:
+            f.write(data[1].strip())
