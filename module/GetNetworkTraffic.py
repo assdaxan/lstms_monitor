@@ -2,7 +2,8 @@
 from time import sleep, strftime
 
 class GetNetworkTraffic:
-    def __init__(self, interface_name):
+    def __init__(self, interface_name, interface_ip):
+        self.interface_ip = interface_ip
         self.interface_name = interface_name
         self.RX_PATH = f'/sys/class/net/{self.interface_name}/statistics/rx_bytes'
         self.TX_PATH = f'/sys/class/net/{self.interface_name}/statistics/tx_bytes'
@@ -14,13 +15,13 @@ class GetNetworkTraffic:
 
         before_rx = get(self.RX_PATH)
         before_tx = get(self.TX_PATH)
-        sleep(3)
+        sleep(60)
         after_rx = get(self.RX_PATH)
         after_tx = get(self.TX_PATH)
 
         datetime_ = strftime("%Y-%m-%d %H:%M:%S")
 
-        return {self.interface_name : {'datetime_':datetime_ ,'rx' : after_rx - before_rx, 'tx' : after_tx - before_tx}}
+        return {self.interface_name : {'datetime_':datetime_ ,'rx' : after_rx - before_rx, 'tx' : after_tx - before_tx, 'ip':self.interface_ip}}
 
 
 if __name__ == "__main__":

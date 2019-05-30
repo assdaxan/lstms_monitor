@@ -10,7 +10,7 @@ class GetNetInterface(Shell):
 
     def Get(self):
         interface_dict = {}
-        t = self.Command('ifconfig -a')
+        t = self.Command('/sbin/ifconfig -a')
 
         for data in self.re_interface_info.findall(t):
             interface_name = data[1]

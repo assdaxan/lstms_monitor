@@ -12,8 +12,8 @@ data = {}
 NetInterface = GetNetInterface()
 interfaces = NetInterface.Get()
 
-for interface in interfaces:
-        NetworkTraffic = GetNetworkTraffic(interface)
+for interface in interfaces.keys():
+        NetworkTraffic = GetNetworkTraffic(interface, interfaces[interface]['inet4'])
         data.update(NetworkTraffic.Get())
 
 encoded_data = json.dumps(data).encode('utf-8')

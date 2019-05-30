@@ -36,18 +36,18 @@ class GetCpuInfo(Shell):
         usage_dict = {}
 
         datetime_ = strftime("%Y-%m-%d %H:%M:%S")
-        # PrevTotal = self.__get()
-        # sleep(10)
+        PrevTotal = self.__get()
+        sleep(10)
         Total = self.__get()
-
+        CPUUsage = 0
         for cpu_id in Total.keys():
-            # diff_total = (Total[cpu_id]['Total_CPU_time'] - PrevTotal[cpu_id]['Total_CPU_time'])
-            # diff_idle = (Total[cpu_id]['Total_CPU_Idle_time'] - PrevTotal[cpu_id]['Total_CPU_Idle_time'])
-            diff_total = (Total[cpu_id]['Total_CPU_time'])
-            diff_idle = (Total[cpu_id]['Total_CPU_Idle_time'])
-            CPUUsage = (diff_total - diff_idle) / diff_total * 100
-
-            usage_dict.update({cpu_id:{"CPUUsage":CPUUsage, "datetime_":datetime_}})
+            diff_total = (Total[cpu_id]['Total_CPU_time'] - PrevTotal[cpu_id]['Total_CPU_time'])
+            diff_idle = (Total[cpu_id]['Total_CPU_Idle_time'] - PrevTotal[cpu_id]['Total_CPU_Idle_time'])
+            # diff_total = (Total[cpu_id]['Total_CPU_time'])
+            # diff_idle = (Total[cpu_id]['Total_CPU_Idle_time'])
+            CPUUsage = CPUUsage + ((diff_total - diff_idle) / diff_total * 100)
+        CPUUsage = CPUUsage / len(Total.keys())
+        usage_dict.update({'CPU':{"CPUUsage":CPUUsage, "datetime_":datetime_}})
 
         return usage_dict
         

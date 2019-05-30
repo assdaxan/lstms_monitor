@@ -12,13 +12,17 @@ class GetDiskInfo(Shell):
         self.disk_info_dict.clear()
 
         datetime_ = strftime("%Y-%m-%d %H:%M:%S")
-        t = self.Command('df -lk')
+        t = self.Command('df -lm')
 
         datas = self.re_info.finditer(t)
 
         for data in datas:
             Filesystem = data.group('Filesystem')
-            if '/dev/loop' not in Filesystem:
+            if '/dev/loop' in Filesystem:
+                pass
+            elif 'tmpfs' == Filesystem:
+                pass
+            else:
                 Size = data.group('Size')
                 Used = data.group('Used')
                 Available = data.group('Available')
