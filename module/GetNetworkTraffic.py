@@ -21,7 +21,7 @@ class GetNetworkTraffic:
 
         datetime_ = strftime("%Y-%m-%d %H:%M:%S")
 
-        return {self.interface_name : {'datetime_':datetime_ ,'rx' : after_rx - before_rx, 'tx' : after_tx - before_tx, 'ip':self.interface_ip}}
+        return {self.interface_name : {'datetime_':datetime_ ,'rx' : (after_rx - before_rx) / 1024, 'tx' : (after_tx - before_tx) / 1024, 'ip':self.interface_ip}}
 
 
 if __name__ == "__main__":

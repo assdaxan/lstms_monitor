@@ -8,7 +8,7 @@ import re
 
 class GetAuthLog:
     def __init__(self):
-        self.re_log = re.compile(r'(?:(?P<mon>\w+) (?P<day>\d+) (?P<time>(?:\d+\:?){3}))(?: *)(?P<user>[^ ]+)(?: *)(?P<command>[\w]+)(?:(?:\[(?P<pid>\d+)\])?\:)(?: *)(?P<log>[^\n]+)')
+        self.re_log = re.compile(r'(?:(?P<mon>\w+)(?: *)(?P<day>\d+)(?: *)(?P<time>(?:\d+\:?){3}))(?: *)(?P<user>[^ ]+)(?: *)(?P<command>[\w]+)(?:(?:\[(?P<pid>\d+)\])?\:)(?: *)(?P<log>[^\n]+)')
         self.MON = {'Jan':'01', 'Feb':'02', 'Mar':'03', 'Apr':'04', 'May':'05', 'Jun':'06', 'Jul':'07', 'Aug':'08', 'Sep':'09', 'Oct':'10', 'Nov':'11', 'Dec':'12'}
     
     def Crawl(self):
