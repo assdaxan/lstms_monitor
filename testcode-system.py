@@ -1,10 +1,7 @@
 import json
 import urllib3
-from os import path
+from os import path, system
 from module.GetSystemInfo import GetSystemInfo
-
-def check(file_name):
-    return path.exists(file_name)
 
 def login():
     print("LSTMS Login Please")
@@ -15,13 +12,13 @@ def login():
 
 CONF_FILE = '/etc/lstms_m/Token.conf'
 
-if(check(CONF_FILE) == True):
+if(path.exists(CONF_FILE) == True):
     print('Exists Token')
 else:
     http = urllib3.PoolManager()
 
-    system = GetSystemInfo()
-    data = system.Get()
+    system_info = GetSystemInfo()
+    data = system_info.Get()
     data.update(login())
 
     encoded_data = json.dumps(data).encode('utf-8')
@@ -41,3 +38,5 @@ else:
 
         with open(CONF_FILE, 'w') as f:
             f.write(data[1].strip())
+
+        system(f"chown lstms:lstms {CONF_FILE}")
