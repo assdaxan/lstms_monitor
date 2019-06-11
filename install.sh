@@ -6,6 +6,9 @@ sudo apt install -y python3
 echo "Add User lstms_m"
 echo 'Y' | sudo adduser --shell /usr/sbin/nologin --no-create-home --disabled-password --disabled-login --quiet lstms_m
 
+echo "Register LSTMS Client"
+sudo /usr/bin/python3 /etc/lstms_m/lstms-register.py
+
 echo "Add Crontab"
 (sudo crontab -u lstms_m -l; echo '* * * * * /usr/bin/python3 /etc/lstms_m/lstms-cpu.py' ) | sudo crontab -u lstms_m -
 (sudo crontab -u lstms_m -l; echo '* * * * * /usr/bin/python3 /etc/lstms_m/lstms-memory.py' ) | sudo crontab -u lstms_m -
