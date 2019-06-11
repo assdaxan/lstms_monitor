@@ -21,13 +21,13 @@ sudo /usr/bin/python3 /etc/lstms_m/lstms-register.py
 # (sudo crontab -u lstms_m -l; echo '* * * * * /usr/bin/python3 /etc/lstms_m/lstms-user.py' ) | sudo crontab -u lstms_m -
 
 echo "Add Systemd Service"
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-auth.service
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-cpu.service
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-memory.service
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-disk.service
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-io.service
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-traffic.service
-sudo cp /etc/lstms_m/lstms.service /etc/systemd/system/lstms-user.service
+sudo cp /etc/lstms_m/lstms-auth.service /etc/systemd/system/lstms-auth.service
+sudo cp /etc/lstms_m/lstms-cpu.service /etc/systemd/system/lstms-cpu.service
+sudo cp /etc/lstms_m/lstms-memory.service /etc/systemd/system/lstms-memory.service
+sudo cp /etc/lstms_m/lstms-disk.service /etc/systemd/system/lstms-disk.service
+sudo cp /etc/lstms_m/lstms-io.service /etc/systemd/system/lstms-io.service
+sudo cp /etc/lstms_m/lstms-traffic.service /etc/systemd/system/lstms-traffic.service
+sudo cp /etc/lstms_m/lstms-user.service /etc/systemd/system/lstms-user.service
 
 echo "Enable LSTMS Service"
 sudo systemctl enable lstms-auth
