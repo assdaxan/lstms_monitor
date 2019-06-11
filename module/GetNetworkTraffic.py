@@ -15,7 +15,7 @@ class GetNetworkTraffic:
 
         before_rx = get(self.RX_PATH)
         before_tx = get(self.TX_PATH)
-        sleep(60)
+        sleep(10)
         after_rx = get(self.RX_PATH)
         after_tx = get(self.TX_PATH)
 

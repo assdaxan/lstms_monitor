@@ -1,0 +1,12 @@
+[Unit]
+Description=LSTMS Monitoring Server
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10s
+ExecStart=/usr/bin/python3 /etc/lstms_m/lstms-memory.py
+WorkingDirectory=/etc/lstms_m
+
+[Install]
+WantedBy=multi-user.target

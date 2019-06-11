@@ -1,0 +1,11 @@
+[Unit]
+Description=LSTMS Monitoring Server
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /etc/lstms_m/lstms-traffic.py
+WorkingDirectory=/etc/lstms_m
+
+[Install]
+WantedBy=multi-user.target
