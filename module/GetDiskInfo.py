@@ -22,6 +22,8 @@ class GetDiskInfo(Shell):
                 pass
             elif 'tmpfs' == Filesystem:
                 pass
+            elif 'udev' == Filesystem:
+                pass
             else:
                 Size = data.group('Size')
                 Used = data.group('Used')
