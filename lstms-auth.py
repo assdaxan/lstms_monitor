@@ -22,8 +22,11 @@ class GetAuthLog:
 
     def Parser(self, line):
         data = self.re_log.search(line)
-        if data.group('command') in ['sshd', 'sudo', 'su']:
-            self.Post(data)
+        try:
+            if data.group('command') in ['sshd', 'sudo', 'su']:
+                self.Post(data)
+        except:
+            pass
 
     def Post(self, data):
         with open('/etc/lstms_m/Token.conf', 'r') as f:
