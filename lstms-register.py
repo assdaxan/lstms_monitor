@@ -40,3 +40,5 @@ else:
             f.write(data[1].strip())
 
         system(f"chown lstms:lstms {CONF_FILE}")
+
+        print("Client registration complete!!")
